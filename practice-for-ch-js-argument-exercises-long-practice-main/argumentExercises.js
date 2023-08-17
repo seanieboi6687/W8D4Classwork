@@ -65,8 +65,19 @@ Function.prototype.myBind = function (...args) {
     return this.apply(arr[0], arr.slice(1));
   };
 };
-const markov = new Cat("Markov");
-const pavlov = new Dog("Pavlov");
+// const markov = new Cat("Markov");
+// const pavlov = new Dog("Pavlov");
 
-markov.says("meow", "Ned");
-markov.says.myBind(pavlov, "meow", "Kush")();
+// markov.says("meow", "Ned");
+// markov.says.myBind(pavlov, "meow", "Kush")();
+
+function curriedSum(numArgs) { // numArgs = 4
+  let numbers = []; // initialize empty array
+  return function _curriedSum(num) { // num = 5
+    numbers.push(num);
+    if (numbers.length === numArgs) {
+      return numbers.reduce((acc, ele) => {acc + ele});
+    };
+    return _curriedSum;
+  };
+};
