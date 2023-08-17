@@ -74,10 +74,10 @@ Function.prototype.myBind = function (...args) {
 function curriedSum(numArgs) { // numArgs = 4
   let numbers = []; // initialize empty array
   return function _curriedSum(num) { // num = 5
-    numbers.push(num);
-    if (numbers.length === numArgs) {
+    numbers.push(num); // 5 is pushed into numbers array
+    if (numbers.length === numArgs) { //checks to see if the length of the array equals the number of args
       return numbers.reduce((acc, ele) => {acc + ele});
     };
-    return _curriedSum;
+    return _curriedSum; // else, return itself.
   };
 };
