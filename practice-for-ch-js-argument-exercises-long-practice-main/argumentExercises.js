@@ -71,13 +71,39 @@ Function.prototype.myBind = function (...args) {
 // markov.says("meow", "Ned");
 // markov.says.myBind(pavlov, "meow", "Kush")();
 
-function curriedSum(numArgs) { // numArgs = 4
+function curriedSum(numArgs) {
+  // numArgs = 4
   let numbers = []; // initialize empty array
-  return function _curriedSum(num) { // num = 5
+  return function _curriedSum(num) {
+    // num = 5
     numbers.push(num); // 5 is pushed into numbers array
-    if (numbers.length === numArgs) { //checks to see if the length of the array equals the number of args
-      return numbers.reduce((acc, ele) => {acc + ele});
-    };
+    if (numbers.length === numArgs) {
+      //checks to see if the length of the array equals the number of args
+      return numbers.reduce((acc, ele) => {
+        acc + ele;
+      });
+    }
     return _curriedSum; // else, return itself.
   };
+}
+
+Function.prototype.curry = function (numArgs) {
+  let args = [];
+  let that = this;
+  return function _curried(arg) {
+    args.push(arg);
+    if (args.length === numArgs) {
+      //return that.apply(null, args);
+      return that.call(null, ...args);
+    }
+    return _curried;
+  };
 };
+
+function multiply(a, b) {
+  return a * b;
+}
+
+const product = multiply.curry(2);
+
+console.log(product(2)(3));
